@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 534" width="800" height="534" role="img">
+  <defs>
+    <pattern id="malha" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0v40" fill="none" stroke="#1E1E26" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="534" fill="#14141A"/>
+  <rect width="800" height="534" fill="url(#malha)"/>
+
+  <!-- Diagonais: a placa vazia do desenho tecnico -->
+  <path d="M0 0 800 534M800 0 0 534" stroke="#23232C" stroke-width="1"/>
+
+  <!-- Marcas de registro nos cantos -->
+  <g stroke="#2F2F39" stroke-width="1.5" fill="none">
+    <path d="M24 44V24h20M756 24h20v20M776 490v20h-20M44 510H24v-20"/>
+  </g>
+
+  <rect x="216" y="238" width="368" height="56" fill="#14141A"/>
+  <text x="400" y="275" fill="#A8AAB3" text-anchor="middle"
+        font-family="ui-monospace, 'IBM Plex Mono', 'Cascadia Mono', monospace"
+        font-size="26" letter-spacing="4">IMAGEM DO PROJETO</text>
+</svg>

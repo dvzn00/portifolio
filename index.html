@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Davi Guerreiro — Desenvolvedor de Software</title>
+  <meta name="description" content="Desenvolvimento de sites, sistemas web e integrações sob medida. Interface, aplicação e integração entregues prontos para uso. Brasília, DF.">
+  <meta name="theme-color" content="#0B0B0F">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+
+  <!-- Fontes auto-hospedadas: sem requisição a terceiros -->
+  <link rel="preload" href="assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/ibm-plex-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/ibm-plex-mono-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Marca que ha JS: sem isso, nada depende de script para ficar visivel. -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a class="wordmark" href="#inicio" aria-label="Davi Guerreiro — início">
+        <span class="wordmark__mark" aria-hidden="true"></span>Davi Guerreiro
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#sobre">Sobre</a></li>
+          <li><a class="nav__link" href="#stack">Stack</a></li>
+          <li><a class="nav__link" href="#projetos">Trabalhos</a></li>
+          <li><a class="nav__link" href="#servicos">Serviços</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn--ghost header__cta" href="#contato">Falar comigo</a>
+
+      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menu mobile -->
+  <div class="menu" id="menu" inert>
+    <nav class="container menu__inner" aria-label="Navegação mobile">
+      <ul class="menu__list">
+        <li><a class="menu__link" href="#sobre">Sobre</a></li>
+        <li><a class="menu__link" href="#stack">Stack</a></li>
+        <li><a class="menu__link" href="#projetos">Trabalhos</a></li>
+        <li><a class="menu__link" href="#servicos">Serviços</a></li>
+        <li><a class="menu__link" href="#contato">Contato</a></li>
+      </ul>
+      <p class="menu__foot">Brasília, DF · Remoto</p>
+    </nav>
+  </div>
+
+  <!-- Regua-margem: mostra onde voce esta na folha. Decorativa para leitores
+       de tela, ja que a navegacao ja informa a secao ativa. -->
+  <div class="rail" id="rail" aria-hidden="true">
+    <span class="rail__label" id="rail-label">Início</span>
+    <span class="rail__track" id="rail-track">
+      <span class="rail__fill" id="rail-fill"></span>
+    </span>
+  </div>
+
+  <main id="conteudo">
+
+    <!-- ============================================================
+         1. HERO
+         ============================================================ -->
+    <section class="hero" id="inicio">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__wash" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <span class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+
+        <div class="hero__content">
+          <p class="eyebrow hero__eyebrow">Desenvolvedor de software</p>
+
+          <h1 class="hero__title">
+            <span class="hero__title-block">Aplicações web, sistemas e integrações.</span>
+            <span class="hero__measure">Do escopo ao ar.</span>
+          </h1>
+
+          <p class="hero__lede">
+            Desenvolvimento sob medida para empresas que precisam de uma presença digital
+            que funcione: interface, aplicação e integração, entregues prontos para uso.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#contato">Iniciar um projeto</a>
+            <a class="link-arrow" href="#projetos">
+              Ver trabalhos
+              <svg class="link-arrow__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <aside class="spec" aria-label="Ficha técnica">
+          <p class="spec__caption">Ficha técnica</p>
+          <dl class="spec__list">
+            <div class="spec__row">
+              <dt>Escopo</dt><dd>Web · Sistemas · Integrações</dd>
+            </div>
+            <div class="spec__row">
+              <dt>Stack</dt><dd>HTML · CSS · JavaScript</dd>
+            </div>
+            <div class="spec__row">
+              <dt>Entrega</dt><dd>Responsivo e acessível</dd>
+            </div>
+            <div class="spec__row">
+              <dt>Atuação</dt><dd>Brasília, DF · Remoto</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. SOBRE
+         ============================================================ -->
+    <section class="section" id="sobre">
+      <div class="container section__inner">
+        <h2 class="eyebrow section__label">Sobre</h2>
+
+        <div class="section__body" data-reveal>
+          <p class="about__text">
+            <span class="about__lead">Sou desenvolvedor focado na criação de aplicações web,
+            sistemas, landing pages e soluções digitais.</span> Trabalho com desenvolvimento
+            orientado a resultado, buscando criar interfaces modernas, aplicações funcionais
+            e soluções adequadas à necessidade de cada projeto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. TECNOLOGIAS
+         ============================================================ -->
+    <section class="section" id="stack">
+      <div class="container section__inner">
+        <h2 class="eyebrow section__label">Stack</h2>
+
+        <div class="section__body" data-reveal>
+          <dl class="legend">
+            <div class="legend__row">
+              <dt>Linguagens</dt>
+              <dd>
+                <ul class="chips">
+                  <li class="chip">HTML5</li>
+                  <li class="chip">CSS3</li>
+                  <li class="chip">JavaScript</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="legend__row">
+              <dt>Versionamento</dt>
+              <dd>
+                <ul class="chips">
+                  <li class="chip">Git</li>
+                  <li class="chip">GitHub</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="legend__row">
+              <dt>Ambiente</dt>
+              <dd>
+                <ul class="chips">
+                  <li class="chip">Claude Code</li>
+                  <li class="chip">VS Code</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="legend__row">
+              <dt>Publicação</dt>
+              <dd>
+                <ul class="chips">
+                  <li class="chip">Vercel</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+    <!-- ============================================================
+         4. PROJETOS
+         ============================================================ -->
+    <section class="section" id="projetos">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="eyebrow section__label">Trabalhos</h2>
+        </div>
+
+        <!-- ==========================================================
+             PLACEHOLDER — 3 cards de exemplo.
+             Para publicar um projeto real, troque neste card:
+               1. <img src> e o texto de alt   -> imagem do projeto
+               2. <h3 class="project__title">   -> nome do projeto
+               3. <p class="project__desc">     -> descricao
+               4. <p class="project__tags">     -> tecnologias usadas
+               5. href="#" do .project__link    -> endereco do projeto
+               6. apague a linha <span class="project__flag">Exemplo</span>
+             A estrutura e o CSS nao precisam mudar.
+             ========================================================== -->
+        <ul class="projects" data-reveal>
+          <li class="project">
+            <div class="project__media">
+              <img src="assets/images/project-placeholder.svg"
+                   alt="Espaço reservado para a imagem do projeto Sistema de Agendamento"
+                   width="800" height="534" loading="lazy" decoding="async">
+            </div>
+            <div class="project__body">
+              <span class="project__flag">Exemplo</span>
+              <h3 class="project__title">Sistema de Agendamento</h3>
+              <p class="project__desc">
+                Plataforma de agendamento online com painel administrativo e fluxo responsivo.
+              </p>
+              <p class="project__tags">React · TypeScript · Supabase</p>
+              <a class="project__link" href="#">
+                Ver projeto
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </li>
+
+          <li class="project">
+            <div class="project__media">
+              <img src="assets/images/project-placeholder.svg"
+                   alt="Espaço reservado para a imagem do projeto Dashboard de Gestão"
+                   width="800" height="534" loading="lazy" decoding="async">
+            </div>
+            <div class="project__body">
+              <span class="project__flag">Exemplo</span>
+              <h3 class="project__title">Dashboard de Gestão</h3>
+              <p class="project__desc">
+                Painel de indicadores com filtros, relatórios e controle de acesso por perfil.
+              </p>
+              <p class="project__tags">Next.js · Node · PostgreSQL</p>
+              <a class="project__link" href="#">
+                Ver projeto
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </li>
+
+          <li class="project">
+            <div class="project__media">
+              <img src="assets/images/project-placeholder.svg"
+                   alt="Espaço reservado para a imagem do projeto Landing Page Institucional"
+                   width="800" height="534" loading="lazy" decoding="async">
+            </div>
+            <div class="project__body">
+              <span class="project__flag">Exemplo</span>
+              <h3 class="project__title">Landing Page Institucional</h3>
+              <p class="project__desc">
+                Página de apresentação com foco em conversão, carregamento rápido e formulário integrado.
+              </p>
+              <p class="project__tags">HTML · CSS · JavaScript</p>
+              <a class="project__link" href="#">
+                Ver projeto
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. SERVIÇOS
+         ============================================================ -->
+    <section class="section section--band" id="servicos">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="eyebrow section__label">Serviços</h2>
+        </div>
+
+        <ul class="services" data-reveal>
+          <li class="service">
+            <h3 class="service__title">Sites e Landing Pages</h3>
+            <p class="service__text">
+              Sites modernos, responsivos e focados em apresentar empresas, produtos e serviços.
+            </p>
+          </li>
+          <li class="service">
+            <h3 class="service__title">Sistemas Web</h3>
+            <p class="service__text">
+              Painéis administrativos, plataformas internas e aplicações personalizadas.
+            </p>
+          </li>
+          <li class="service">
+            <h3 class="service__title">Integrações e Automação</h3>
+            <p class="service__text">
+              Integrações entre sistemas, APIs e automação de processos.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- ============================================================
+         6. CONTATO
+         ============================================================ -->
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow section__label">Contato</p>
+        </div>
+
+        <div class="contact" data-reveal>
+          <div class="contact__intro">
+            <h2 class="contact__title">Conte o que precisa ser construído.</h2>
+            <p class="contact__lede">
+              Descreva o projeto em poucas linhas. Respondo com o que dá para fazer,
+              prazo e valor.
+            </p>
+
+            <ul class="channels">
+              <li>
+                <a class="channel" href="https://wa.me/5561983207986">
+                  <span class="channel__label">WhatsApp</span>
+                  <span class="channel__value">61 98320-7986</span>
+                  <svg class="channel__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a class="channel" href="mailto:davi2004d@gmail.com">
+                  <span class="channel__label">E-mail</span>
+                  <span class="channel__value">davi2004d@gmail.com</span>
+                  <svg class="channel__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a class="channel" href="https://github.com/dvzn00" target="_blank" rel="noopener">
+                  <span class="channel__label">GitHub</span>
+                  <span class="channel__value">github.com/dvzn00</span>
+                  <svg class="channel__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3.5 10.5 10.5 3.5M5 3.5h5.5V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <form class="form" id="form-contato" novalidate>
+            <div class="field">
+              <label class="field__label" for="nome">Nome</label>
+              <input class="field__control" type="text" id="nome" name="nome"
+                     autocomplete="name" aria-describedby="erro-nome">
+              <p class="field__error" id="erro-nome" hidden></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="email">E-mail</label>
+              <input class="field__control" type="email" id="email" name="email"
+                     autocomplete="email" aria-describedby="erro-email">
+              <p class="field__error" id="erro-email" hidden></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="tipo">Tipo de projeto</label>
+              <select class="field__control" id="tipo" name="tipo" aria-describedby="erro-tipo">
+                <option value="">Selecione</option>
+                <option>Site ou landing page</option>
+                <option>Sistema web</option>
+                <option>Integração ou automação</option>
+                <option>Outro</option>
+              </select>
+              <p class="field__error" id="erro-tipo" hidden></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="mensagem">Mensagem</label>
+              <textarea class="field__control" id="mensagem" name="mensagem" rows="4"
+                        aria-describedby="erro-mensagem"></textarea>
+              <p class="field__error" id="erro-mensagem" hidden></p>
+            </div>
+
+            <button class="btn btn--primary form__submit" type="submit">Enviar pelo WhatsApp</button>
+
+            <p class="form__note">
+              O botão abre o WhatsApp com a mensagem já escrita. Nada sai daqui sem você enviar.
+            </p>
+            <p class="form__status" id="form-status" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       7. FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="wordmark" href="#inicio">
+            <span class="wordmark__mark" aria-hidden="true"></span>Davi Guerreiro
+          </a>
+          <p class="footer__meta">Desenvolvedor de Software · Brasília, DF · Remoto</p>
+        </div>
+
+        <ul class="socials">
+          <li>
+            <a class="social" href="https://github.com/dvzn00" target="_blank" rel="noopener">
+              GitHub
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3.5 10.5 10.5 3.5M5 3.5h5.5V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a class="social" href="https://wa.me/5561983207986" target="_blank" rel="noopener">
+              WhatsApp
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3.5 10.5 10.5 3.5M5 3.5h5.5V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a class="social" href="mailto:davi2004d@gmail.com">
+              E-mail
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3.5 10.5 10.5 3.5M5 3.5h5.5V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© <span id="ano">2026</span> Davi Guerreiro — Desenvolvedor de Software</p>
+        <p>Construído em HTML, CSS e JavaScript.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/script.js" defer></script>
+</body>
+</html>
