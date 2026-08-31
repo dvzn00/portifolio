@@ -18,8 +18,9 @@
    13. Secao: Contato
    14. Footer
    15. Regua-margem (assinatura)
-   16. Movimento
-   17. Impressao
+   16. Modal de projeto
+   17. Movimento
+   18. Impressao
    ========================================================================= */
 
 
@@ -1201,7 +1202,217 @@ select.field__control option { background: var(--bg-2); color: var(--text); }
 .rail__tick.is-passed { background: var(--blue); }
 
 
-/* 16. MOVIMENTO =========================================================== */
+/* 16. MODAL DE PROJETO ====================================================
+   Mesmo padrao de visibilidade do menu mobile: ao abrir, 'visibility' muda
+   na hora para o foco conseguir entrar; ao fechar, so depois do fade. */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  /* A coluna precisa ser 'minmax(0, 1fr)': com track automatico, uma imagem
+     larga na galeria esticaria a caixa para alem da viewport. */
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  justify-items: center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s var(--ease), visibility 0s linear .3s;
+}
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s var(--ease), visibility 0s linear 0s;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 11, 15, .84);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.modal__caixa {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(920px, 100%);
+  min-width: 0;
+  max-height: min(88svh, 900px);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transform: translateY(14px);
+  transition: transform .35s var(--ease);
+}
+.modal.is-open .modal__caixa { transform: none; }
+
+/* O topo nao rola: o botao de fechar fica sempre alcancavel. */
+.modal__topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex: none;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  border-bottom: 1px solid var(--border);
+}
+
+.modal__titulo {
+  margin-top: .625rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1rem + 1.6vw, 1.875rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  color: var(--text);
+}
+
+.modal__fechar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  margin: -.25rem -.25rem 0 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  transition: border-color .25s var(--ease), color .25s var(--ease);
+}
+.modal__fechar:hover { border-color: var(--blue); color: var(--blue); }
+
+.modal__corpo {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+}
+
+/* Galeria: uma tela grande e as miniaturas embaixo. */
+.galeria { margin-bottom: 2rem; }
+
+/* Altura limitada com rolagem propria: assim a captura em retrato cabe sem
+   esticar o modal e sem encolher as deitadas. */
+.galeria__palco {
+  max-height: min(48svh, 460px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.galeria__palco img {
+  width: 100%;
+  height: auto;
+}
+
+.galeria__legenda {
+  margin-top: .875rem;
+  font-size: .875rem;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.galeria__abas {
+  display: flex;
+  gap: .5rem;
+  margin-top: 1.125rem;
+  padding-bottom: .25rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.galeria__aba {
+  flex: none;
+  width: 5.75rem;
+  padding: 0;
+  overflow: hidden;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color .25s var(--ease), opacity .25s var(--ease);
+  opacity: .55;
+}
+.galeria__aba img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: left top;
+}
+.galeria__aba:hover { opacity: .85; }
+.galeria__aba[aria-selected="true"] {
+  opacity: 1;
+  border-color: var(--blue);
+}
+
+/* Em tela estreita a captura encolheria a ponto de nao dar para ler nada:
+   ela fica maior que o palco e o palco rola na horizontal. */
+@media (max-width: 699px) {
+  .galeria__palco img { min-width: 34rem; }
+}
+
+.modal__desc {
+  max-width: 68ch;
+  color: var(--text-2);
+  line-height: 1.75;
+}
+.modal__desc p + p { margin-top: 1rem; }
+
+/* Mesmo par rotulo/valor da ficha tecnica do hero. */
+.ficha { margin-top: .875rem; }
+.ficha__linha {
+  display: grid;
+  gap: .25rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--border);
+}
+.ficha__linha:last-child { border-bottom: 1px solid var(--border); }
+
+@media (min-width: 640px) {
+  .ficha__linha {
+    grid-template-columns: 9.5rem 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.ficha dt {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.ficha dd {
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.modal__bloco {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.modal__bloco .chips { margin-top: .875rem; }
+
+.modal__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+
+/* 17. MOVIMENTO =========================================================== */
 
 @keyframes rise {
   from { opacity: 0; transform: translateY(12px); }
@@ -1264,7 +1475,7 @@ select.field__control option { background: var(--bg-2); color: var(--text); }
 }
 
 
-/* 17. IMPRESSAO ===========================================================
+/* 18. IMPRESSAO ===========================================================
    Sem isto, o papel sairia em branco: os navegadores nao imprimem o fundo
    escuro, entao o texto claro desapareceria, e os blocos com revelacao ao
    rolar nunca teriam sido revelados. */
@@ -1284,7 +1495,7 @@ select.field__control option { background: var(--bg-2); color: var(--text); }
     --petrol:   #666666;
   }
 
-  .header, .menu, .rail, .skip-link, .form,
+  .header, .menu, .modal, .rail, .skip-link, .form,
   .btn, .link-arrow, .channel__icon,
   .hero__grid, .hero__wash, .marks, .project__media { display: none; }
 

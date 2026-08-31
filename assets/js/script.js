@@ -10,6 +10,7 @@
    06. Regua-margem: progresso e tiques
    07. Formulario de contato
    08. Ano do rodape
+   09. Modal de projeto
    ========================================================================= */
 
 (function () {
@@ -331,6 +332,297 @@
 
   var ano = document.getElementById('ano');
   if (ano) ano.textContent = String(new Date().getFullYear());
+
+
+  /* 09. MODAL DE PROJETO ===================================================
+     Os dados vivem aqui, nao no HTML: acrescentar um projeto e acrescentar
+     uma chave neste objeto mais um botao com o 'data-projeto' correspondente. */
+
+  var PROJETOS = {
+    cashflow: {
+      titulo: 'Cashflow — Dashboard Financeiro Pessoal',
+
+      resumo: [
+        'Aplicação de gestão financeira pessoal com múltiplos usuários. Cada conta enxerga ' +
+        'apenas os próprios dados, o mês é acompanhado em três tipos de gráfico e o extrato ' +
+        'sai em PDF gerado no servidor.',
+
+        'O escopo foi puxado deliberadamente para além de um CRUD: orçamento por categoria ' +
+        'com aviso ao passar do limite, categorias que o próprio usuário cria e edita, tema ' +
+        'claro e escuro que sobrevive entre sessões, e cálculo monetário que não perde centavo.'
+      ],
+
+      imagens: [
+        {
+          src: 'assets/images/cashflow-dashboard.png', largura: 1740, altura: 712,
+          rotulo: 'Dashboard',
+          alt: 'Dashboard com saldo total, receitas, despesas e taxa de economia do mês, acima de um gráfico de barras diário.',
+          legenda: 'Saldo, receitas, despesas e taxa de economia do mês, com o ritmo diário logo abaixo.'
+        },
+        {
+          src: 'assets/images/cashflow-graficos.png', largura: 1735, altura: 710,
+          rotulo: 'Gráficos',
+          alt: 'Gráfico de pizza de despesas por categoria, anéis de progresso dos orçamentos e gráfico de linha da evolução mensal.',
+          legenda: 'Despesas por categoria, andamento dos orçamentos e a evolução do ano em linha.'
+        },
+        {
+          src: 'assets/images/cashflow-transacoes.png', largura: 1740, altura: 817,
+          rotulo: 'Transações',
+          alt: 'Tabela de transações do mês com data, categoria, descrição e valor, e filtros de mês, categoria e tipo.',
+          legenda: 'Lançamentos do mês com filtro por categoria e por tipo, e o total da página no rodapé.'
+        },
+        {
+          src: 'assets/images/cashflow-relatorios.png', largura: 1743, altura: 820,
+          rotulo: 'Relatórios',
+          alt: 'Tela de relatórios com o resumo do mês e o botão de gerar PDF.',
+          legenda: 'Resumo do período e o botão que gera o extrato em PDF no servidor.'
+        },
+        {
+          src: 'assets/images/cashflow-configuracoes.png', largura: 1066, altura: 1772,
+          rotulo: 'Configurações',
+          alt: 'Tela de configurações com a lista de categorias, os limites mensais por categoria, os dados de perfil e a troca de tema.',
+          legenda: 'Categorias, limite mensal de cada uma, perfil e troca de tema. Tela alta: role dentro dela para ver o resto.'
+        },
+        {
+          src: 'assets/images/cashflow-login.png', largura: 1067, altura: 501,
+          rotulo: 'Entrar',
+          alt: 'Tela de login com campos de e-mail e senha.',
+          legenda: 'Entrada por e-mail e senha, sobre o Supabase Auth.'
+        },
+        {
+          src: 'assets/images/cashflow-criar-conta.png', largura: 1067, altura: 502,
+          rotulo: 'Criar conta',
+          alt: 'Tela de cadastro de nova conta.',
+          legenda: 'Cadastro aberto, com confirmação de e-mail ligada.'
+        }
+      ],
+
+      decisoes: [
+        { rotulo: 'Valores',
+          texto: 'Toda conta roda em centavos inteiros. Em ponto flutuante, 0,1 + 0,2 devolve ' +
+                 '0,30000000000000004; convertendo para centavo antes de somar e dividindo só no ' +
+                 'fim, o centavo sempre fecha.' },
+        { rotulo: 'Isolamento',
+          texto: 'Row Level Security no Supabase: transactions, categories e budgets filtram por ' +
+                 'user_id = auth.uid(). O isolamento é do banco, não da aplicação.' },
+        { rotulo: 'PDF',
+          texto: 'Gerado no servidor com @react-pdf/renderer, em API Route do Next.js. O clique em ' +
+                 'Gerar PDF já entrega o arquivo baixado.' },
+        { rotulo: 'Datas',
+          texto: 'Guardadas como DATE, sem fuso, e manipuladas como texto ISO — assim nenhuma virada ' +
+                 'de dia depende do relógio de quem acessa.' },
+        { rotulo: 'Gráficos',
+          texto: 'Recharts em import dinâmico com ssr: false, para não quebrar a hidratação do Next.js.' },
+        { rotulo: 'Autenticação',
+          texto: 'Supabase Auth por e-mail e senha, com cadastro aberto e confirmação de e-mail ativa.' },
+        { rotulo: 'Tema',
+          texto: 'next-themes com shadcn/ui; a escolha fica no localStorage e volta na sessão seguinte.' }
+      ],
+
+      numeros: [
+        { rotulo: 'Telas', texto: 'Dashboard, Transações, Relatórios e Configurações' },
+        { rotulo: 'Banco', texto: '4 tabelas — profiles, categories, transactions e budgets' },
+        { rotulo: 'Gráficos', texto: '3 — barras comparativas, pizza e linha de evolução mensal' },
+        { rotulo: 'Testes', texto: '97 unitários, cobrindo saldo, orçamento e evolução mensal' },
+        { rotulo: 'Construção', texto: 'Cerca de 2 semanas, do planejamento aos ajustes finais' }
+      ],
+
+      tecnologias: ['Next.js', 'TypeScript', 'Tailwind', 'Supabase', 'Recharts', 'shadcn/ui', 'next-themes'],
+
+      acoes: [
+        { rotulo: 'Ver código', href: 'https://github.com/dvzn00/cashflow', externo: true, principal: true },
+        { rotulo: 'Baixar relatório de exemplo', href: 'assets/pdf/cashflow-extrato-2026-08.pdf', baixar: true }
+      ]
+    }
+  };
+
+  var modal = document.getElementById('modal-projeto');
+  var gatilhos = document.querySelectorAll('[data-projeto]');
+
+  if (modal && gatilhos.length) {
+    var corpoRolavel = modal.querySelector('.modal__corpo');
+    var botaoFechar = document.getElementById('modal-fechar');
+    var elTitulo = document.getElementById('modal-titulo');
+    var elPalco = document.getElementById('galeria-palco');
+    var elImagem = document.getElementById('galeria-img');
+    var elLegenda = document.getElementById('galeria-legenda');
+    var elAbas = document.getElementById('galeria-abas');
+    var elDesc = document.getElementById('modal-desc');
+    var elDecisoes = document.getElementById('modal-decisoes');
+    var elNumeros = document.getElementById('modal-numeros');
+    var elChips = document.getElementById('modal-chips');
+    var elAcoes = document.getElementById('modal-acoes');
+    var aoFundo = document.querySelectorAll('.header, main, .footer, .rail');
+    var gatilhoAtivo = null;
+    var abas = [];
+
+    var limpar = function (el) { while (el.firstChild) el.removeChild(el.firstChild); };
+
+    // Preenche uma lista rotulo/valor no mesmo formato da ficha tecnica.
+    var montarFicha = function (destino, itens) {
+      limpar(destino);
+      itens.forEach(function (item) {
+        var linha = document.createElement('div');
+        linha.className = 'ficha__linha';
+
+        var dt = document.createElement('dt');
+        dt.textContent = item.rotulo;
+
+        var dd = document.createElement('dd');
+        dd.textContent = item.texto;
+
+        linha.appendChild(dt);
+        linha.appendChild(dd);
+        destino.appendChild(linha);
+      });
+    };
+
+    var mostrarTela = function (indice, projeto, moverFoco) {
+      var imagem = projeto.imagens[indice];
+
+      elImagem.src = imagem.src;
+      elImagem.alt = imagem.alt;
+      elImagem.width = imagem.largura;
+      elImagem.height = imagem.altura;
+      elLegenda.textContent = imagem.legenda;
+      elPalco.scrollTop = 0;
+      elPalco.scrollLeft = 0;
+
+      abas.forEach(function (aba, i) {
+        var ativa = i === indice;
+        aba.setAttribute('aria-selected', ativa ? 'true' : 'false');
+        aba.tabIndex = ativa ? 0 : -1;
+        if (ativa) elPalco.setAttribute('aria-labelledby', aba.id);
+      });
+
+      if (moverFoco) abas[indice].focus();
+    };
+
+    var montarGaleria = function (projeto) {
+      limpar(elAbas);
+      abas = [];
+
+      projeto.imagens.forEach(function (imagem, indice) {
+        var aba = document.createElement('button');
+        aba.type = 'button';
+        aba.className = 'galeria__aba';
+        aba.id = 'galeria-aba-' + indice;
+        aba.setAttribute('role', 'tab');
+        aba.setAttribute('aria-selected', 'false');
+        aba.setAttribute('aria-label', imagem.rotulo);
+        aba.tabIndex = -1;
+
+        var mini = document.createElement('img');
+        mini.src = imagem.src;
+        mini.alt = '';
+        mini.loading = 'lazy';
+        mini.decoding = 'async';
+        aba.appendChild(mini);
+
+        aba.addEventListener('click', function () { mostrarTela(indice, projeto, false); });
+        elAbas.appendChild(aba);
+        abas.push(aba);
+      });
+
+      // Setas, Home e End percorrem as telas, como manda o padrao de abas.
+      elAbas.onkeydown = function (evento) {
+        var atual = abas.findIndex(function (a) { return a.getAttribute('aria-selected') === 'true'; });
+        var destino = null;
+
+        if (evento.key === 'ArrowRight') destino = (atual + 1) % abas.length;
+        else if (evento.key === 'ArrowLeft') destino = (atual - 1 + abas.length) % abas.length;
+        else if (evento.key === 'Home') destino = 0;
+        else if (evento.key === 'End') destino = abas.length - 1;
+
+        if (destino === null) return;
+        evento.preventDefault();
+        mostrarTela(destino, projeto, true);
+      };
+
+      mostrarTela(0, projeto, false);
+    };
+
+    var montar = function (projeto) {
+      elTitulo.textContent = projeto.titulo;
+
+      limpar(elDesc);
+      projeto.resumo.forEach(function (paragrafo) {
+        var p = document.createElement('p');
+        p.textContent = paragrafo;
+        elDesc.appendChild(p);
+      });
+
+      montarGaleria(projeto);
+      montarFicha(elDecisoes, projeto.decisoes);
+      montarFicha(elNumeros, projeto.numeros);
+
+      limpar(elChips);
+      projeto.tecnologias.forEach(function (nome) {
+        var li = document.createElement('li');
+        li.className = 'chip';
+        li.textContent = nome;
+        elChips.appendChild(li);
+      });
+
+      limpar(elAcoes);
+      projeto.acoes.forEach(function (acao) {
+        var a = document.createElement('a');
+        a.className = 'btn ' + (acao.principal ? 'btn--primary' : 'btn--ghost');
+        a.href = acao.href;
+        a.textContent = acao.rotulo;
+        if (acao.externo) { a.target = '_blank'; a.rel = 'noopener'; }
+        if (acao.baixar) a.setAttribute('download', '');
+        elAcoes.appendChild(a);
+      });
+    };
+
+    var abrirModal = function (chave, gatilho) {
+      var projeto = PROJETOS[chave];
+      if (!projeto) return;
+
+      montar(projeto);
+      gatilhoAtivo = gatilho;
+
+      modal.removeAttribute('inert');
+      modal.classList.add('is-open');
+      aoFundo.forEach(function (el) { el.setAttribute('inert', ''); });
+      document.body.classList.add('is-locked');
+
+      // Mesmo motivo do menu: so da para focar depois do recalculo de estilo.
+      window.requestAnimationFrame(function () { botaoFechar.focus(); });
+    };
+
+    var fecharModal = function () {
+      modal.classList.remove('is-open');
+      modal.setAttribute('inert', '');
+      aoFundo.forEach(function (el) { el.removeAttribute('inert'); });
+      document.body.classList.remove('is-locked');
+      corpoRolavel.scrollTop = 0;
+
+      if (gatilhoAtivo) {
+        gatilhoAtivo.focus();
+        gatilhoAtivo = null;
+      }
+    };
+
+    var modalAberto = function () { return modal.classList.contains('is-open'); };
+
+    gatilhos.forEach(function (gatilho) {
+      gatilho.addEventListener('click', function () {
+        abrirModal(gatilho.getAttribute('data-projeto'), gatilho);
+      });
+    });
+
+    botaoFechar.addEventListener('click', fecharModal);
+
+    modal.querySelectorAll('[data-fechar-modal]').forEach(function (el) {
+      el.addEventListener('click', fecharModal);
+    });
+
+    document.addEventListener('keydown', function (evento) {
+      if (evento.key === 'Escape' && modalAberto()) fecharModal();
+    });
+  }
 
 
   /* Estado inicial, sem esperar a primeira rolagem. */
