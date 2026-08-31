@@ -737,7 +737,9 @@ body.is-locked { overflow: hidden; }
 
 .project__media {
   position: relative;
-  aspect-ratio: 3 / 2;
+  /* Proporcao de captura de aplicacao, nao de foto: 3/2 cortava a barra
+     lateral e a coluna da direita das telas reais. */
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
   background: var(--bg-3);
@@ -757,6 +759,22 @@ body.is-locked { overflow: hidden; }
 /* A placa de espaco reservado ja nasce na paleta: nao precisa ser domada.
    Ao trocar por uma foto real (.jpg/.png/.webp), o filtro volta sozinho. */
 .project__media img[src$=".svg"] { filter: none; }
+
+/* Duas telas empilhadas: a segunda aparece no hover. Em toque, onde nao ha
+   hover, a primeira continua contando a historia sozinha. */
+.project__shot {
+  position: absolute;
+  inset: 0;
+  /* Corta pela direita: a barra lateral do app fica inteira em vez de
+     aparecer pela metade. */
+  object-position: left center;
+}
+.project__shot--alt {
+  opacity: 0;
+  transition: opacity .45s var(--ease);
+}
+.project:hover .project__shot--alt { opacity: 1; }
+
 
 .project__body {
   display: flex;
@@ -827,6 +845,39 @@ body.is-locked { overflow: hidden; }
 }
 .project__link svg { transition: transform .3s var(--ease); }
 .project:hover .project__link svg { transform: translateX(4px); }
+
+/* Varias acoes no mesmo card. A ordem importa: este bloco vem DEPOIS de
+   '.project__link' para vencer por cascata, e o seletor do principal tem a
+   mesma especificidade do que anula o ::after, so que mais abaixo. */
+.project__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1.25rem;
+  padding-top: .875rem;
+}
+.project__actions .project__link { padding-top: 0; }
+.project__actions .project__link::after { content: none; }
+
+/* O principal NAO pode ser posicionado: e o '.project' que precisa ser o
+   bloco de referencia do 'inset: 0', senao a area clicavel encolhe para o
+   tamanho do proprio link. */
+.project__actions .project__link--principal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* Os secundarios sao posicionados e vem depois no DOM, entao pintam por
+   cima da area esticada do principal e continuam clicaveis. */
+.project__actions .project__link--secundario {
+  position: relative;
+  color: var(--text-2);
+  font-weight: 400;
+  transition: color .25s var(--ease);
+}
+.project__actions .project__link--secundario:hover { color: var(--blue); }
+
 
 
 /* 12. SECAO: SERVICOS ===================================================== */
