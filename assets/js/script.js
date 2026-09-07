@@ -433,6 +433,85 @@
         { rotulo: 'Ver código', href: 'https://github.com/dvzn00/cashflow', externo: true, principal: true },
         { rotulo: 'Baixar relatório de exemplo', href: 'assets/pdf/cashflow-extrato-2026-08.pdf', baixar: true }
       ]
+    },
+
+    mealplanner: {
+      titulo: 'Meal Planner — Planejador Semanal de Refeições',
+
+      resumo: [
+        'Sete dias numa grade de horários livres. As receitas entram arrastadas do painel, ' +
+        'e a lista de compras se refaz sozinha somando os ingredientes de tudo que está no ' +
+        'plano: 200 g de brócolis em duas receitas viram uma linha de 400 g. Dá para marcar ' +
+        'o que já foi ao carrinho, dispensar o que já se tem em casa, copiar um dia ou uma ' +
+        'semana inteira, e levar tudo num PDF de duas folhas.',
+
+        'O peso do sistema está no banco, não na tela. A lista de compras é estado derivado, ' +
+        'mantido por gatilhos no Postgres; o isolamento entre contas é feito por Row Level ' +
+        'Security, com 25 políticas; e as migrações são testadas contra um Postgres de ' +
+        'verdade, não contra um dublê.'
+      ],
+
+      imagens: [
+        {
+          src: 'assets/images/mealplanner-semana.png', largura: 1755, altura: 697,
+          rotulo: 'Minha semana',
+          alt: 'Grade semanal do Meal Planner: sete dias em colunas, cada um com café da manhã, almoço e jantar, e o painel de receitas favoritas acima.',
+          legenda: 'A grade dos sete dias: cada horário recebe uma receita arrastada do painel de favoritas.'
+        }
+      ],
+
+      decisoes: [
+        { rotulo: 'Dispensar',
+          texto: 'Apagar um item da lista funcionava até o próximo arraste, e o recálculo o ' +
+                 'trazia de volta. Remover virou marcar, na coluna ignorado. O on conflict do ' +
+                 'recálculo só toca quantidade e data, então as marcas do usuário atravessam ' +
+                 'intactas — sem uma linha de código nova.' },
+        { rotulo: 'Segurança',
+          texto: 'Nove tabelas com Row Level Security e 25 políticas. auth.uid() entra como ' +
+                 '(select auth.uid()) para o planejador avaliar uma vez por consulta, não uma ' +
+                 'por linha. Se um filtro sumir do front num refactor, o Postgres continua recusando.' },
+        { rotulo: 'Testes',
+          texto: 'As suítes de RLS e da lista rodam com PGlite — Postgres compilado para ' +
+                 'WebAssembly — executando os arquivos de migração de verdade dentro do Vitest. ' +
+                 'Um dublê de Supabase testaria a intenção do código; isso testa a política que ' +
+                 'o banco aplica.' },
+        { rotulo: 'Lista derivada',
+          texto: 'generate_shopping_list é uma função PL/pgSQL disparada por gatilhos, que ' +
+                 'agrupa por ingrediente e unidade. O usuário recebe grant update apenas nas ' +
+                 'colunas comprado e ignorado: privilégio por coluna, então nem pela API dá ' +
+                 'para escrever a quantidade somada.' },
+        { rotulo: 'Datas',
+          texto: 'Toda a aritmética de semana opera sobre texto ISO. new Date("2026-09-07") é ' +
+                 'meia-noite em UTC, que em Brasília ainda é dia 6 às 21h — com Date, a semana ' +
+                 'viraria um dia antes para metade do país.' },
+        { rotulo: 'PDF',
+          texto: 'Rota de API com @react-pdf/renderer, declarado em serverExternalPackages ' +
+                 'porque tem renderizador próprio e dependências nativas de Node. São duas ' +
+                 'folhas separadas de propósito: o cardápio fica em casa e a lista vai ao mercado.' },
+        { rotulo: 'Interface',
+          texto: '19 Server Actions validadas com Zod, devolvendo resultado tipado em vez de ' +
+                 'exceção. A grade usa useOptimistic com useTransition: o arraste aparece na ' +
+                 'hora e o servidor desfaz sozinho se a gravação falhar. Nenhum useEffect busca dados.' }
+      ],
+
+      numeros: [
+        { rotulo: 'Testes', texto: '189 unitários no Vitest e 88 verificações de navegador no Playwright' },
+        { rotulo: 'Banco', texto: '9 tabelas, 25 políticas de RLS, 7 funções e 8 gatilhos — 913 linhas de SQL' },
+        { rotulo: 'Telas', texto: '10, do login ao histórico de semanas anteriores' },
+        { rotulo: 'Server Actions', texto: '19, distribuídas em 6 arquivos' },
+        { rotulo: 'Código', texto: 'Cerca de 13.500 linhas de TypeScript e TSX' },
+        { rotulo: 'Documentação', texto: '89 decisões de arquitetura registradas, cada uma com o porquê' }
+      ],
+
+      tecnologias: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'Supabase',
+        'PostgreSQL', 'dnd-kit', 'Zod', '@react-pdf/renderer', 'shadcn/ui', 'Vitest',
+        'PGlite', 'Playwright'],
+
+      acoes: [
+        { rotulo: 'Visitar site', href: 'https://mealplanner-vzn3.vercel.app/', externo: true, principal: true },
+        { rotulo: 'Ver código', href: 'https://github.com/dvzn00/mealplanner', externo: true },
+        { rotulo: 'Baixar plano de exemplo', href: 'assets/pdf/meal-planner-exemplo.pdf', baixar: true }
+      ]
     }
   };
 
@@ -498,11 +577,22 @@
       if (moverFoco) abas[indice].focus();
     };
 
+    var elGaleria = modal.querySelector('.galeria');
+
     var montarGaleria = function (projeto) {
       limpar(elAbas);
       abas = [];
 
-      projeto.imagens.forEach(function (imagem, indice) {
+      var imagens = projeto.imagens || [];
+
+      // Projeto ainda sem capturas: a galeria inteira sai de cena em vez de
+      // aparecer vazia. Basta preencher 'imagens' para ela voltar.
+      elGaleria.hidden = imagens.length === 0;
+      // Uma miniatura sozinha nao e escolha nenhuma: a fita so aparece com duas ou mais.
+      elAbas.hidden = imagens.length < 2;
+      if (!imagens.length) return;
+
+      imagens.forEach(function (imagem, indice) {
         var aba = document.createElement('button');
         aba.type = 'button';
         aba.className = 'galeria__aba';

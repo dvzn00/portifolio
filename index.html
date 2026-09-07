@@ -279,23 +279,43 @@
 
           <li class="project">
             <div class="project__media">
-              <img src="assets/images/project-placeholder.svg"
-                   alt="Espaço reservado para a imagem do projeto Landing Page Institucional"
-                   width="800" height="400" loading="lazy" decoding="async">
+              <img class="project__shot"
+                   src="assets/images/mealplanner-semana.png"
+                   alt="Grade semanal do Meal Planner: sete dias em colunas, cada um com café da manhã, almoço e jantar, e o painel de receitas favoritas acima."
+                   width="1755" height="697" loading="lazy" decoding="async">
             </div>
             <div class="project__body">
-              <span class="project__flag">Exemplo</span>
-              <h3 class="project__title">Landing Page Institucional</h3>
+              <h3 class="project__title">Meal Planner — Planejador Semanal de Refeições</h3>
               <p class="project__desc">
-                Página de apresentação com foco em conversão, carregamento rápido e formulário integrado.
+                Cardápio da semana montado arrastando receitas para cada horário. A lista de
+                compras é recalculada pelo banco a cada mudança, e o plano sai em PDF para
+                levar ao mercado.
               </p>
-              <p class="project__tags">HTML · CSS · JavaScript</p>
-              <a class="project__link" href="#">
-                Ver projeto
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+              <p class="project__tags">Next.js · TypeScript · Supabase · dnd-kit · PostgreSQL · Vitest</p>
+
+              <div class="project__actions">
+                <button class="project__link project__link--principal" type="button"
+                        data-projeto="mealplanner">
+                  Ver projeto
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M8.5 1.5h4v4M5.5 12.5h-4v-4M12.5 1.5 8 6M1.5 12.5 6 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <a class="project__link project__link--secundario"
+                   href="https://mealplanner-vzn3.vercel.app/" target="_blank" rel="noopener">
+                  Visitar site
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3.5 10.5 10.5 3.5M5 3.5h5.5V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+                <a class="project__link project__link--secundario"
+                   href="https://github.com/dvzn00/mealplanner" target="_blank" rel="noopener">
+                  Ver código
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3.5 10.5 10.5 3.5M5 3.5h5.5V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
             </div>
           </li>
         </ul>

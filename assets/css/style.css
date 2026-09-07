@@ -1327,6 +1327,9 @@ select.field__control option { background: var(--bg-2); color: var(--text); }
   overscroll-behavior-x: contain;
 }
 
+/* 'display: flex' acima venceria a regra padrao do atributo hidden. */
+.galeria__abas[hidden] { display: none; }
+
 .galeria__aba {
   flex: none;
   width: 5.75rem;
