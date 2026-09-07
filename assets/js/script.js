@@ -402,6 +402,18 @@
           rotulo: 'Entrada',
           alt: 'Tela "Área do estúdio" com campos de e-mail e senha, botão Entrar e um link para a agenda pública.',
           legenda: 'A porta do painel. Quem vem marcar sessão é mandado de volta para a agenda pública.'
+        },
+        {
+          src: 'assets/images/darkink-painel.png', largura: 1751, altura: 706,
+          rotulo: 'Painel',
+          alt: 'Painel do estúdio, "Hoje no estúdio": quatro números — sessões hoje, confirmadas, aguardando confirmação e horários livres — e o cartão da próxima sessão.',
+          legenda: 'O que o estúdio vê ao entrar: o dia em quatro números e a próxima sessão à frente.'
+        },
+        {
+          src: 'assets/images/darkink-agenda.png', largura: 485, altura: 643,
+          rotulo: 'Agenda do dia',
+          alt: 'Agenda do dia em coluna contínua das 10h às 20h, com os horários livres marcados e duas sessões pendentes, cada uma com os botões Confirmar e Cancelar.',
+          legenda: 'A coluna das 10h às 20h. O horário livre aparece como linha vazia, e cada sessão se confirma ou cancela ali mesmo.'
         }
       ],
 
@@ -450,7 +462,8 @@
         'Base UI', 'Supabase', 'PostgreSQL', 'Zod 4', '@react-pdf/renderer', 'Vitest', 'axe-core'],
 
       acoes: [
-        { rotulo: 'Ver código', href: 'https://github.com/dvzn00/DARKTATOO', externo: true, principal: true }
+        { rotulo: 'Ver código', href: 'https://github.com/dvzn00/DARKTATOO', externo: true, principal: true },
+        { rotulo: 'Baixar agenda de exemplo', href: 'assets/pdf/dark-ink-agenda-2026-09-07.pdf', baixar: true }
       ]
     },
 
