@@ -356,10 +356,52 @@
 
       imagens: [
         {
-          src: 'assets/images/darkink-home.png', largura: 1147, altura: 617,
+          src: 'assets/images/darkink-home.png', largura: 1440, altura: 900,
           rotulo: 'Início',
           alt: 'Página inicial do Dark Ink Studio: título "Cada linha é permanente", o texto sobre a agenda aberta com 40 dias e os botões de agendar sessão e ver os artistas.',
           legenda: 'A abertura do site: tipografia, uma linha dourada e o caminho direto para a agenda.'
+        },
+        {
+          src: 'assets/images/darkink-servicos.png', largura: 1440, altura: 900,
+          rotulo: 'Serviços',
+          alt: 'Seção "O que sai daqui": quatro serviços em grade — fine line, blackwork, realismo preto e cinza e cover-up — cada um com duração e preço inicial.',
+          legenda: 'Os serviços em folha de flash: duração e preço de partida, sem tabela escondida.'
+        },
+        {
+          src: 'assets/images/darkink-agendar-servico.png', largura: 1440, altura: 900,
+          rotulo: 'Etapa 1',
+          alt: 'Etapa 1 de 5, "O que você quer tatuar?": os quatro serviços em cartões, ao lado da ficha de sessão ainda com todos os campos vazios.',
+          legenda: 'Etapa 1 de 5. A duração escolhida aqui é o que define os horários lá na frente.'
+        },
+        {
+          src: 'assets/images/darkink-agendar-data.png', largura: 1440, altura: 1198,
+          rotulo: 'Calendário',
+          alt: 'Etapa 3 de 5, "Que dia?": calendário de setembro e outubro de 2026, com os dias sem horário livre apagados e a ficha já mostrando serviço, duração e artista.',
+          legenda: 'A agenda abre 40 dias à frente. Dia sem vaga não é clicável — a checagem vem do banco.'
+        },
+        {
+          src: 'assets/images/darkink-agendar-horario.png', largura: 1440, altura: 900,
+          rotulo: 'Horários',
+          alt: 'Etapa 4 de 5, "A que horas?": dois horários livres, 18:00 e 19:00, com o fim de cada sessão calculado abaixo.',
+          legenda: 'Só sobra o que cabe: a duração do serviço é descontada do que já está reservado.'
+        },
+        {
+          src: 'assets/images/darkink-agendar-dados.png', largura: 1440, altura: 1019,
+          rotulo: 'Seus dados',
+          alt: 'Etapa 5 de 5, "Quase lá": campos de nome, e-mail, telefone, link de referência e observações, com o botão "Reservar horário".',
+          legenda: 'Etapa 5 de 5. Nome, e-mail e telefone — e nenhum campo de senha: não se cria conta.'
+        },
+        {
+          src: 'assets/images/darkink-confirmacao.png', largura: 1440, altura: 1095,
+          rotulo: 'Confirmação',
+          alt: 'Página de confirmação com selo dourado: ficha da sessão #DK-9652 com serviço, artista, data, horário, duração e os dados de contato do cliente.',
+          legenda: 'O comprovante vive em /agendamento/{token}, um UUID do banco. Sem cadastro e sem senha.'
+        },
+        {
+          src: 'assets/images/darkink-login.png', largura: 1440, altura: 900,
+          rotulo: 'Entrada',
+          alt: 'Tela "Área do estúdio" com campos de e-mail e senha, botão Entrar e um link para a agenda pública.',
+          legenda: 'A porta do painel. Quem vem marcar sessão é mandado de volta para a agenda pública.'
         }
       ],
 
