@@ -215,23 +215,36 @@
         <ul class="projects" data-reveal>
           <li class="project">
             <div class="project__media">
-              <img src="assets/images/project-placeholder.svg"
-                   alt="Espaço reservado para a imagem do projeto Sistema de Agendamento"
-                   width="800" height="400" loading="lazy" decoding="async">
+              <img class="project__shot"
+                   src="assets/images/darkink-home.png"
+                   alt="Página inicial do Dark Ink Studio: título “Cada linha é permanente”, o texto sobre a agenda aberta com 40 dias e o botão de agendar sessão."
+                   width="1147" height="617" loading="lazy" decoding="async">
             </div>
             <div class="project__body">
-              <span class="project__flag">Exemplo</span>
-              <h3 class="project__title">Sistema de Agendamento</h3>
+              <h3 class="project__title">Dark Ink Studio — Plataforma de Agendamento</h3>
               <p class="project__desc">
-                Plataforma de agendamento online com painel administrativo e fluxo responsivo.
+                O cliente marca a sessão sem criar conta e o estúdio administra a agenda num
+                painel privado. Overbooking é impedido pelo banco, por constraint, não por
+                código de aplicação.
               </p>
-              <p class="project__tags">React · TypeScript · Supabase</p>
-              <a class="project__link" href="#">
-                Ver projeto
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+              <p class="project__tags">Next.js · TypeScript · Supabase · PostgreSQL · Zod · Vitest</p>
+
+              <div class="project__actions">
+                <button class="project__link project__link--principal" type="button"
+                        data-projeto="darkink">
+                  Ver projeto
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M8.5 1.5h4v4M5.5 12.5h-4v-4M12.5 1.5 8 6M1.5 12.5 6 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <a class="project__link project__link--secundario"
+                   href="https://github.com/dvzn00/DARKTATOO" target="_blank" rel="noopener">
+                  Ver código
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3.5 10.5 10.5 3.5M5 3.5h5.5V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
             </div>
           </li>
 

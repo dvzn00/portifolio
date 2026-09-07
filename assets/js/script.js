@@ -339,6 +339,79 @@
      uma chave neste objeto mais um botao com o 'data-projeto' correspondente. */
 
   var PROJETOS = {
+    darkink: {
+      titulo: 'Dark Ink Studio — Plataforma de Agendamento',
+
+      resumo: [
+        'O cliente escolhe artista, serviço, dia e horário, confirma com nome e telefone e ' +
+        'recebe um link próprio para acompanhar a sessão — tudo sem criar conta. Do outro ' +
+        'lado, o estúdio entra num painel privado, vê a agenda do dia e muda o status de ' +
+        'cada atendimento.',
+
+        'As regras de negócio vivem em funções puras, sem I/O e sem relógio próprio: o "agora" ' +
+        'é injetado, então cada regra é testável isolada. E a garantia que mais importa não ' +
+        'está no código — está no banco. O estúdio é fictício: artistas, serviços e preços ' +
+        'são conteúdo de demonstração. A plataforma, não.'
+      ],
+
+      imagens: [
+        {
+          src: 'assets/images/darkink-home.png', largura: 1147, altura: 617,
+          rotulo: 'Início',
+          alt: 'Página inicial do Dark Ink Studio: título "Cada linha é permanente", o texto sobre a agenda aberta com 40 dias e os botões de agendar sessão e ver os artistas.',
+          legenda: 'A abertura do site: tipografia, uma linha dourada e o caminho direto para a agenda.'
+        }
+      ],
+
+      decisoes: [
+        { rotulo: 'Overbooking',
+          texto: 'Uma EXCLUDE USING gist compara intervalos de tempo por artista, com ' +
+                 'btree_gist para casar igualdade e sobreposição na mesma constraint. Dois ' +
+                 'clientes pedindo o mesmo horário no mesmo instante: o segundo recebe 23P01, ' +
+                 'traduzido em "este horário acabou de ser reservado". Sem lock e sem transação ' +
+                 'manual. Unicidade simples não resolveria — serviços têm durações diferentes, ' +
+                 'e 14h–16h não colide com 15h–16h pelo horário de início.' },
+        { rotulo: 'Dados do cliente',
+          texto: 'O papel anon não tem acesso nenhum à tabela de agendamentos. Conceder SELECT ' +
+                 'para validar disponibilidade exporia nome, e-mail e telefone de todo mundo: a ' +
+                 'reserva acontece no servidor e a consulta de disponibilidade devolve apenas horários.' },
+        { rotulo: 'Fuso',
+          texto: 'Nenhuma data passa por new Date(). O servidor roda em UTC e, às 22h de ' +
+                 'Brasília, já virou o dia. Todo "agora" vem de studioNow(), que lê o instante ' +
+                 'em America/Sao_Paulo.' },
+        { rotulo: 'Domínio puro',
+          texto: 'Disponibilidade e regras de reserva são funções sem I/O, que recebem os ' +
+                 'agendamentos já lidos e o relógio por parâmetro. Não conhecem Supabase nem ' +
+                 'React — por isso 84 testes cobrem cada regra isolada, sem subir banco.' },
+        { rotulo: 'Chave de serviço',
+          texto: 'A chave administrativa do Supabase só é usada por um módulo, e esse módulo ' +
+                 'importa server-only. Se alguém tentar importá-lo num componente de cliente, ' +
+                 'o build quebra em vez de a chave vazar.' },
+        { rotulo: 'Acesso sem conta',
+          texto: 'O acompanhamento fica em /agendamento/{token}, um UUID gerado pelo banco. Sem ' +
+                 'cadastro, sem senha e sem id sequencial que permita adivinhar o agendamento ' +
+                 'de outra pessoa.' },
+        { rotulo: 'Acessibilidade',
+          texto: 'Um script de QA roda axe-core sobre a landing, as cinco etapas do agendamento ' +
+                 'e o login — tudo que se alcança sem sessão.' }
+      ],
+
+      numeros: [
+        { rotulo: 'Testes', texto: '84 unitários no Vitest, sobre disponibilidade, regras de reserva, telefone, status e fuso' },
+        { rotulo: 'Banco', texto: '4 tabelas, 6 políticas de RLS e a trava anti-overbooking — 524 linhas de SQL re-executável' },
+        { rotulo: 'Telas', texto: '6 — landing, agendamento em etapas, acompanhamento por link, login, painel e agenda do dia' },
+        { rotulo: 'Código', texto: 'Cerca de 5.500 linhas de TypeScript e TSX, em 58 arquivos' },
+        { rotulo: 'Documentação', texto: 'Decisões de arquitetura registradas no repositório, com o porquê de cada uma' }
+      ],
+
+      tecnologias: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'shadcn/ui',
+        'Base UI', 'Supabase', 'PostgreSQL', 'Zod 4', '@react-pdf/renderer', 'Vitest', 'axe-core'],
+
+      acoes: [
+        { rotulo: 'Ver código', href: 'https://github.com/dvzn00/DARKTATOO', externo: true, principal: true }
+      ]
+    },
+
     cashflow: {
       titulo: 'Cashflow — Dashboard Financeiro Pessoal',
 
